@@ -29,3 +29,31 @@ tableTTP <- descrTable(ttpCat ~ . - icuid,
 # tableTTP
 
 # export2word(tableTTP, file = "tableTTP.docx")
+
+# //ANCHOR - diagnosis
+
+names(dfSubGroup)
+
+# hospMortality
+
+tableMorICD <- descrTable(hospMortality ~ icd,
+    data = dfSubGroup,
+    method = NA,
+    show.all = TRUE
+)
+tableMorICD
+
+# export2word(tableMorICD, file = "tableMorICD.docx")
+
+# ttpCat
+
+dfSubGroupICD <- merge(dfSubGroup[, c("icuid", "icd")], dfCovMor[, c(1, 11)], by = "icuid", all = FALSE)
+
+tableTTPICD <- descrTable(ttpCat ~ icd,
+    data = dfSubGroupICD,
+    method = NA,
+    show.all = TRUE
+)
+tableTTPICD
+
+# export2word(tableTTPICD, file = "tableTTPICD.docx")
